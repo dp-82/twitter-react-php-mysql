@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #222;
+  background-color: aqua;
+}
+
+.auth {
+  text-align: center;
+  margin-top: 10rem;
+}
+
+.auth input {
+  margin: 0.5rem;
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+}
+
+.auth button {
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.auth h4 {
+  margin: 0.5rem;
+}
