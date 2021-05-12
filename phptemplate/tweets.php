@@ -60,6 +60,25 @@ function deleteTweet($tid)
     $con->close();
 }
 
+function getTweetInfo($tid)
+{
+    $server = "172.17.0.2";
+    $user = "root";
+    $password = "password";
+    $db = "Twiier";
+    $con = mysqli_connect($server, $user, $password, $db) or die($GLOBALS['ERR_CON']);
+    $query = "SELECT * FROM tweets WHERE tid='$tid'";
+    $result = $con->query($query);
+    if (!$result) {
+        echo $GLOBALS['ERR_QUERY'];
+    }
+    $con->close();
+    while ($row = mysqli_fetch_assoc($result)) {
+        return $row;
+    }
+    return array();
+}
+
 if (isset($_POST['type'])) {
     $type = $_POST['type'];
     if ($type == "Tweets") {
@@ -72,5 +91,9 @@ if (isset($_POST['type'])) {
     } else if ($type == 'DeleteTweet') {
         $tid = $_POST['tid'];
         deleteTweet($tid);
+    } else if ($type == 'Post') {
+        $tid = $_POST['tid'];
+        $tweetInfo = getTweetInfo($tid);
+        echo json_encode($tweetInfo);
     }
 }

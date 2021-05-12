@@ -9,7 +9,6 @@ body {
   padding: 0;
   height: 100%;
   font-family: "Courier New", Courier, monospace;
-  background-color: aqua;
 }
 
 .main{
@@ -23,7 +22,11 @@ body {
 }
 
 .second{
+  border: 1px solid black;
   width: 40%;
+  background-color: aqua;
+  overflow-y: scroll;
+  height:calc(100vh)
 }
 
 .third{
@@ -32,14 +35,14 @@ body {
   padding: 0%;
   overflow-y: scroll;
   height:calc(100vh);
-  border-left: 1px solid white;
+  border-left: 1px solid blue;
 }
 
 .nothing{
   max-height: 5%;
   padding: 2%;
   width: 100%;
-  background-color: cadetblue;
+  background-color: rgb(109, 111, 223);
   color: white;
 }
 
@@ -54,20 +57,11 @@ body {
   width: 100%;
   height: 100%;
   text-align: center;
-  border: 1px solid white;
   overflow-y: scroll;
   height:calc(95vh);
+  background-color: aqua;
 
 }
-
-.my-tweets {
-  width: 100%;
-  overflow-y: scroll;
-  height:calc(70%);
-  text-align: center;
-  /* border: 1px solid black; */
-}
-
 
 .tweet {
   padding: 0.5%;
@@ -88,59 +82,17 @@ body {
 }
 
 
-.my-tweet {
-
-  padding: 2%;
+.profile-info {
   margin: 1%;
-  border-radius: 0.5rem;
-  width: 98%;
-  background-color: white;
-  text-align: start;
-  max-height: 20%;
-}
-
-.my-tweet p{
-  word-break: break-all;
-  white-space: normal;
-  padding: 1%;  
-}
-
-.my-tweet button{
-  margin-top: 1%;
-  
-}
-
-.rem{
-  max-height: 50%;
-}
-
-.rem button{
-  float: right;
-  max-height: 30%;
-  border-radius: 1rem;
-}
-
-.part{
-  max-height: 30%;
-  padding: 1%;
-}
-.part h4 {
-  float: left;
-}
-
-.part h6 {
-  float: right;
-}
-
-.profile {
   padding: 3%;
-  width: 100%;
+  width: 98%;
   max-height: 20%;
   background-color: white;
+  border-radius: 1rem;
   /* border: 1px solid black; */
 }
 
-.profile h4{
+.profile-info h4{
   max-height: 10%;
   margin: 2%;
 }
@@ -232,3 +184,60 @@ body {
   margin: 1rem;
   background-color: rgb(71, 47, 60);
 }
+
+.first img{
+  width: 10%;
+  height: 7%;
+  margin-top: 2%;
+  margin-bottom: 1%;
+  margin-left: 50%;
+}
+
+.item{
+  margin-left: 50%;
+  height: 5%;
+  margin-top: 1%;
+}
+
+.item a{
+  text-decoration: none;
+}
+
+.item h3{
+  font-size: 1.5rem;
+  color: black;
+}
+
+/* 
+Profile.js styles here
+*/
+
+
+
+.profile-tweet-rem{
+  max-height: 50%;
+}
+
+.profile-tweet-rem button{
+  float: right;
+  max-height: 30%;
+  border-radius: 1rem;
+  font-size: 1rem;
+  background-color: gray;
+  color: white;
+  width: 10%;
+}
+
+.part{
+  max-height: 30%;
+  padding: 1%;
+}
+.part h4 {
+  float: left;
+}
+
+.part h6{
+  float: right;
+}
+
+

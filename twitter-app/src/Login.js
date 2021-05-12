@@ -1,14 +1,17 @@
 import React from 'react'
-import './login.css';
+import './auth.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
 const SUCCESS_LOGIN = "User details are correct";
 
-
 class Login extends React.Component {
 
+    constructor(props) {
+        super(props);
+        if (sessionStorage.getItem('username') != null) window.location.href = '/home';
+    }
     state = {
         username: "",
         password: ""
@@ -33,7 +36,8 @@ class Login extends React.Component {
             config: { headers: { 'Content-Type': 'multipart/form-data' } }
         }).then(function (response) {
             if (response.data === SUCCESS_LOGIN) {
-                window.location.href = "/" + username;
+                sessionStorage.setItem('username', username);
+                window.location.href = "/home";
             } else {
                 alert(response.data);
             }
@@ -42,12 +46,15 @@ class Login extends React.Component {
             console.log(response)
         });
     }
+
     render() {
         return (
-            <div className="auth">
+            <div className="login-auth">
+                <img src="tiniLogo.png" alt="Logo" />
+                <h1>Log in to Twitter</h1>
                 <input type="text" name="username" placeholder="enter username" id="username" value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })} /> <br />
                 <input type="text" name="password" placeholder="enter password" id="password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} /> <br />
-                <button onClick={(e) => this.loginHandler(e)}>Login</button> <br />
+                <button onClick={(e) => this.loginHandler(e)}>Log in</button> <br />
                 <h4>don't have an account? <Link to="/register">Register</Link></h4>
             </div>
         )
