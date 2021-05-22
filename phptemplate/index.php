@@ -10,6 +10,7 @@ $ERR_REGISTER = "Username is already taken";
 $SUCCESS_LOGIN = "User details are correct";
 $SUCCESS_REGISTER = "User details are inserted";
 
+
 function checkUserHasAccount($username)
 {
     $server = "172.17.0.2";
@@ -115,10 +116,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['name
 if (isset($_POST['type'])) {
     $username = $_POST['username'];
     $type = $_POST['type'];
-    if ($type == "Profile") {
-        $user_array = checkUserHasAccount($username);
-        echo json_encode($user_array);
-    } else if ($type == "People") {
+    if ($type == "People") {
         $users_array = getAllUsers($username);
         $following_array = getFollowingUsers($username);
         $res_array = array();

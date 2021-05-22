@@ -1,12 +1,15 @@
 import React from 'react'
 import './index.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const AuthHome = () => {
 
     if (sessionStorage.getItem('username') !== null) {
-        window.location.href = '/' + sessionStorage.getItem('username');
+        window.location.href = '/home';
     }
+
+    window.location.href = '/login';
 
     return (
         <div className="auth-home">

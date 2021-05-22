@@ -11,6 +11,25 @@ $SUCCESS_LOGIN = "User details are correct";
 $SUCCESS_REGISTER = "User details are inserted";
 
 
+function getName($username)
+{
+    $server = "172.17.0.2";
+    $user = "root";
+    $password = "password";
+    $db = "Twiier";
+    $con = mysqli_connect($server, $user, $password, $db) or die($GLOBALS['ERR_CON']);
+    $query = "SELECT name FROM users WHERE username='$username'";
+    $result = $con->query($query);
+    if (!$result) {
+        echo $GLOBALS['ERR_QUERY'];
+        return '';
+    }
+    $con->close();
+    while ($row = mysqli_fetch_assoc($result)) {
+        return $row['name'];
+    }
+    return '';
+}
 
 function getTweets($username)
 {
@@ -19,7 +38,7 @@ function getTweets($username)
     $password = "password";
     $db = "Twiier";
     $con = mysqli_connect($server, $user, $password, $db) or die($GLOBALS['ERR_CON']);
-    $query = "SELECT * FROM tweets WHERE username='$username' OR username IN (SELECT following AS username FROM followings WHERE follower='$username') ORDER BY date DESC";
+    $query = "SELECT * FROM tweets WHERE username='$username' OR username IN (SELECT following AS username FROM followings WHERE follower='$username') ORDER BY timestamp DESC";
     $result = $con->query($query);
     if (!$result) {
         echo $GLOBALS['ERR_QUERY'];
@@ -27,19 +46,20 @@ function getTweets($username)
     $con->close();
     $users_array = array();
     while ($row = mysqli_fetch_assoc($result)) {
+        $row['name'] = getName($row['username']);
         array_push($users_array, $row);
     }
     return $users_array;
 }
 
-function insertTweet($username, $tweet)
+function insertTweet($username, $tweet, $timestamp)
 {
     $server = "172.17.0.2";
     $user = "root";
     $password = "password";
     $db = "Twiier";
     $con = mysqli_connect($server, $user, $password, $db) or die($GLOBALS['ERR_CON']);
-    $query = "INSERT INTO tweets(username,tweet) VALUES('$username','$tweet')";
+    $query = "INSERT INTO tweets(username,tweet,timestamp) VALUES('$username','$tweet','$timestamp')";
     if (!$con->query($query)) {
         echo $GLOBALS['ERR_QUERY'];
     }
@@ -74,6 +94,7 @@ function getTweetInfo($tid)
     }
     $con->close();
     while ($row = mysqli_fetch_assoc($result)) {
+        $row['name'] = getName($row['username']);
         return $row;
     }
     return array();
@@ -87,7 +108,8 @@ if (isset($_POST['type'])) {
         echo json_encode($tweets);
     } else if ($type == "NewTweet") {
         $username = $_POST['username'];
-        insertTweet($username, $_POST['tweet']);
+        $timestamp = date($_POST['timestamp']);
+        insertTweet($username, $_POST['tweet'], $timestamp);
     } else if ($type == 'DeleteTweet') {
         $tid = $_POST['tid'];
         deleteTweet($tid);

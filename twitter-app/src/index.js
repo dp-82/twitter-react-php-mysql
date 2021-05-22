@@ -5,6 +5,8 @@ import AuthHome from './AuthHome';
 import Login from './Login';
 import Register from './Register'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 ReactDOM.render(
     <Router>
